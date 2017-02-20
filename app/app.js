@@ -3,7 +3,11 @@
 
   // Declare app level module which depends on views, and components
   angular.module('app', ['ngRoute', 'app.tetris'])
-    .config(configure);
+    .config(configure)
+    .constant('_', window._)
+    .run(($rootScope) => {
+      $rootScope._ = window._;
+    });
 
   configure.$inject = ['$locationProvider', '$routeProvider'];
 
