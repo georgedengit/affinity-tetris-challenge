@@ -23,7 +23,7 @@
 
     function newGame() {
       grid.newGrid();
-      game.currentPiece = new Piece('O');
+      game.currentPiece = new Piece('Z');
     }
 
     function pauseGame() {

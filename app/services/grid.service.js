@@ -34,6 +34,7 @@
     }
 
     function Cell(arr) {
+      this.type = null;
       this.x = arr[0];
       this.y = arr[1];
     }

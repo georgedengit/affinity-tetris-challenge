@@ -7,7 +7,8 @@
       ng-hide="i < 2">
       <div
         class="cell"
-        ng-repeat="col in row">
+        ng-repeat="cell in row"
+        ng-style="{'background-color': vm.pieceConstants[cell.type].color }">
       </div>
     </div>
   </div>
