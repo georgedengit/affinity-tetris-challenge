@@ -4,16 +4,12 @@
   angular.module('app.service')
     .factory('pieceService', pieceService);
 
-  pieceService.$inject = ['gridService'];
+  pieceService.$inject = ['gridService', 'pieceConstants'];
 
-  const defaultPos = {
-    x: 0,
-    y: 0
-  };
-
-  function pieceService(grid) {
-    let Piece = function() {
-      grid.firstRow
+  function pieceService(grid, pieceConstants) {
+    let Piece = function(type) {
+      this.type = type;
+      this.coords = [];
     }
 
     Piece.prototype.putInCell = (cell) => {
