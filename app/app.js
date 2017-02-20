@@ -2,7 +2,11 @@
   'use strict';
 
   // Declare app level module which depends on views, and components
-  angular.module('app', ['ngRoute', 'app.tetris'])
+  angular.module('app', [
+    'ngRoute',
+    'app.constants',
+    'app.tetris'
+  ])
     .config(configure)
     .constant('_', window._)
     .run(($rootScope) => {

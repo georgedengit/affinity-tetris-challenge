@@ -2,11 +2,13 @@
   'use strict';
 
   angular.module('app.service')
-    .factory(tetriminoService, tetriminoService);
+    .factory('tetriminoService', tetriminoService);
 
   function tetriminoService() {
-    let service = {};
+    let tetrimio = {
 
-    return service;
+    };
+
+    return tetrimio;
   }
 })();

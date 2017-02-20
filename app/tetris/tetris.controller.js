@@ -12,6 +12,7 @@
 
     function init() {
       // Start game
+      gameService.newGame();
     }
 
     init();

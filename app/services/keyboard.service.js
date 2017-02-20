@@ -5,8 +5,8 @@
     .factory('keyboardService', keyboardService)
 
   function keyboardService() {
-    let service = {};
+    let keyboard = {};
 
-    return service;
+    return keyboard;
   }
 })();
