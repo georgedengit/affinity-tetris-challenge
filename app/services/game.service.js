@@ -27,6 +27,7 @@
 
     function newPiece() {
       game.currentPiece = new Piece(pieces[Math.floor(Math.random()*pieces.length)]);
+      console.log(game.currentPiece);
     }
 
     function pauseGame() {
@@ -40,19 +41,27 @@
       }
       switch ($event.keyCode) {
         case 37: // Left
-          currentPiece.moveLeft();
+          if (!game.isPaused) {
+            currentPiece.moveLeft()
+          };
           break;
         case 38: // Up
-          currentPiece.rotatePiece();
+          if (!game.isPaused) {
+            currentPiece.rotatePiece();
+          }
           break;
         case 39: // Right
-          currentPiece.moveRight();
+          if (!game.isPaused) {
+            currentPiece.moveRight();
+          }
           break;
         case 40: // Down
-          currentPiece.moveDown();
+          if (!game.isPaused) {
+            currentPiece.moveDown();
+          }
           break;
         case 80: // P
-          self.pauseGame();
+          game.pauseGame();
           break;
         default:
           return;

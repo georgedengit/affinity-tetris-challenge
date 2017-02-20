@@ -15,7 +15,9 @@
 
     $interval(function() {
       if (!game.isPaused) {
-        game.currentPiece.moveDown();
+        if (!game.currentPiece.moveDown()) {
+          game.newPiece();
+        }
       }
     }, 250);
 

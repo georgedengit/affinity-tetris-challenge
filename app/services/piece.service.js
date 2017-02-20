@@ -16,6 +16,9 @@
       self.coords = [];
       _.each(pieceConstants[type].coords, function(coordArr) {
         let cell = grid.getCell(coordArr[0], coordArr[1]);
+        if (!cell) {
+          return false;
+        }
         self.coords.push(cell);
       });
       self.renderCells();
@@ -122,6 +125,8 @@
       self.resetCells();
       // Rerender based on new coordinates
       self.renderCells();
+
+      return true;
     };
 
     Piece.prototype.rotatePiece = function() {
