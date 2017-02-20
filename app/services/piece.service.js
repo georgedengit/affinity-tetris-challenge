@@ -7,7 +7,6 @@
   pieceService.$inject = ['gridService', 'pieceConstants'];
 
   function pieceService(grid, pieceConstants) {
-
     // Create piece and render it within the grid
     // Stores cells held by piece and the coordinates
     let Piece = function(type) {

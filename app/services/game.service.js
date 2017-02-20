@@ -4,13 +4,14 @@
   angular.module('app.service')
     .factory('gameService', gameService);
 
-  gameService.$inject = ['gridService', 'pieceService'];
+  gameService.$inject = ['$interval', 'gridService', 'pieceService'];
 
-  function gameService(grid, Piece) {
+  function gameService($interval, grid, Piece) {
     const pieces = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
     let game = {
             // Game state variables
       currentPiece: null,
+      isPaused: false,
 
       // Game controls
       newGame: newGame,
@@ -29,7 +30,7 @@
     }
 
     function pauseGame() {
-
+      game.isPaused = !game.isPaused;
     }
 
     function keypress($event) {
@@ -39,15 +40,20 @@
       }
       switch ($event.keyCode) {
         case 37: // Left
-          return currentPiece.moveLeft();
+          currentPiece.moveLeft();
+          break;
         case 38: // Up
-          return currentPiece.rotatePiece();
+          currentPiece.rotatePiece();
+          break;
         case 39: // Right
-          return currentPiece.moveRight();
+          currentPiece.moveRight();
+          break;
         case 40: // Down
-          return currentPiece.moveDown();
+          currentPiece.moveDown();
+          break;
         case 80: // P
-          return self.pauseGame();
+          self.pauseGame();
+          break;
         default:
           return;
       }

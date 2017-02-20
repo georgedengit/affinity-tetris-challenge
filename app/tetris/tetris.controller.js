@@ -4,14 +4,20 @@
   angular.module('app.tetris')
     .controller('TetrisController', TetrisController);
 
-  TetrisController.$inject = ['$document', 'gameService', 'gridService', 'pieceConstants'];
+  TetrisController.$inject = ['$document', '$interval', 'gameService', 'gridService', 'pieceConstants'];
 
-  function TetrisController($scope, game, grid, pieceConstants) {
+  function TetrisController($document, $interval, game, grid, pieceConstants) {
     let vm = this;
     vm.title = "Tetris";
     vm.grid = grid;
 
-    $scope.on('keydown', game.keypress);
+    $document.on('keydown', game.keypress);
+
+    $interval(function() {
+      if (!game.isPaused) {
+        game.currentPiece.moveDown();
+      }
+    }, 250);
 
     function init() {
       // Start game
