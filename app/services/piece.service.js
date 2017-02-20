@@ -12,6 +12,7 @@
     let Piece = function(type) {
       let self = this;
       self.type = type;
+      self.state = 1;
       self.cells = [];
       self.coords = [];
       _.each(pieceConstants[type].coords, function(coordArr) {
@@ -125,13 +126,216 @@
       self.resetCells();
       // Rerender based on new coordinates
       self.renderCells();
-
+      // moveDown is special in determining if we reached the end
+      // so this needs to return true if the move was possible
       return true;
     };
 
     Piece.prototype.rotatePiece = function() {
+      let self = this;
 
+      // Get next rotation state
+      const rotationArray = self.getRotation();
+      const nextState = rotationArray[0];
+      const coords = rotationArray[1];
+
+      // Check if rotation is allowed
+      let isAllowed = _.every(coords, function(coord) {
+        let newCell = grid.getCell(coord.x, coord.y);
+        if (!newCell || (newCell.type !== null && !_.includes(self.cells, newCell))) {
+          return false;
+        }
+        return true;
+      });
+      if (!isAllowed) {
+        return false;
+      }
+
+      // If rotation is allowed, set state and new coords
+      self.state = nextState;
+      self.coords = coords;
+      // Reset the cells
+      self.resetCells();
+      // Rerender based on new coordinates
+      self.renderCells();
     };
+
+    Piece.prototype.getRotation = function() {
+      let self = this;
+      let center = self.cells[0];
+      let coords = [];
+      let nextState;
+      switch(self.type) {
+        case 'I':
+          switch(self.state) {
+            case 1:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x+1, y: center.y});
+              coords.push({x: center.x+2, y: center.y});
+              nextState = 2;
+              break;
+            case 2:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              coords.push({x: center.x, y: center.y+2});
+              nextState = 1;
+              break;
+          }
+          break;
+        case 'J':
+          switch(self.state) {
+            case 1:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x+1, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              nextState = 2;
+              break;
+            case 2:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x+1, y: center.y});
+              coords.push({x: center.x+1, y: center.y+1});
+              nextState = 3;
+              break;
+            case 3:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y+1});
+              nextState = 4;
+              break;
+            case 4:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x-1, y: center.y-1});
+              coords.push({x: center.x+1, y: center.y});
+              nextState = 1;
+              break;
+          }
+          break;
+        case 'L':
+          switch(self.state) {
+            case 1:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y+1});
+              nextState = 2;
+              break;
+            case 2:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x-1, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y});
+              nextState = 3;
+              break;
+            case 3:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x-1, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              nextState = 4;
+              break;
+            case 4:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x+1, y: center.y});
+              coords.push({x: center.x+1, y: center.y+1});
+              nextState = 1;
+              break;
+          }
+          break;
+        case 'S':
+          switch(self.state) {
+            case 1:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x+1, y: center.y});
+              coords.push({x: center.x+1, y: center.y+1});
+              nextState = 2;
+              break;
+            case 2:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y+1});
+              coords.push({x: center.x-1, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y});
+              nextState = 3;
+              break;
+            case 3:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x-1, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              nextState = 4;
+              break;
+            case 4:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x+1, y: center.y-1});
+              nextState = 1;
+              break;
+          }
+          break;
+        case 'T':
+          switch(self.state) {
+            case 1:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x+1, y: center.y});
+              coords.push({x: center.x, y: center.y+1});
+              nextState = 2;
+              break;
+            case 2:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y});
+              nextState = 3;
+              break;
+            case 3:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              nextState = 4;
+              break;
+            case 4:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y1});
+              coords.push({x: center.x, y: center.y-1});
+              coords.push({x: center.x+1, y: center.y});
+              nextState = 1;
+              break;
+          }
+          break;
+        case 'Z':
+          switch(self.state) {
+            case 1:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y});
+              coords.push({x: center.x-1, y: center.y+1});
+              nextState = 2;
+              break;
+            case 2:
+              coords.push({x: center.x, y: center.y});
+              coords.push({x: center.x-1, y: center.y});
+              coords.push({x: center.x-1, y: center.y-1});
+              coords.push({x: center.x, y: center.y+1});
+              nextState = 1;
+              break;
+          }
+          break;
+        case 'O':
+        default:
+          return [self.state, self.coords];
+      }
+      return [nextState, coords];
+    }
 
     return Piece;
   }
