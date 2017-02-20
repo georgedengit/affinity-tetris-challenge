@@ -6,7 +6,7 @@
 
   gameService.$inject = ['gridService', 'pieceService'];
 
-  function gameService(grid, piece) {
+  function gameService(grid, Piece) {
     let game = {
       // Game state variables
       currentPiece: null,
@@ -22,8 +22,8 @@
     };
 
     function newGame() {
-      game.currentPiece = null;
       grid.newGrid();
+      game.currentPiece = new Piece('O');
     }
 
     function pauseGame() {

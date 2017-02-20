@@ -3,11 +3,11 @@
   <div class="grid">
     <div
       class="row"
-      ng-repeat="row in _.range(vm.grid.rows)"
-      ng-hide="row < 2">
+      ng-repeat="(i, row) in vm.grid.cells"
+      ng-hide="i < 2">
       <div
         class="cell"
-        ng-repeat="col in _.range(vm.grid.cols)">
+        ng-repeat="col in row">
       </div>
     </div>
   </div>

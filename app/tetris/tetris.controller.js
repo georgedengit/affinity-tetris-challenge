@@ -14,6 +14,7 @@
     function init() {
       // Start game
       game.newGame();
+      console.log(vm.grid.cells);
     }
 
     init();

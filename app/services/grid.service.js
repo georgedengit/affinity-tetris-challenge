@@ -15,11 +15,27 @@
 
       // Grid controls
       newGrid: newGrid,
+      newCell: newCell,
       getCell: getCell
     };
 
     function newGrid() {
       grid.cells = [];
+      for (let y = 0; y < grid.rows; y++) {
+        grid.cells[y] = [];
+        for (let x = 0; x < grid.cols; x++) {
+          grid.cells[y].push(grid.newCell([x, y]));
+        }
+      }
+    }
+
+    function newCell(arr) {
+      return new Cell(arr);
+    }
+
+    function Cell(arr) {
+      this.x = arr[0];
+      this.y = arr[1];
     }
 
     function getCell(x, y) {

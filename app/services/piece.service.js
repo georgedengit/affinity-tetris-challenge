@@ -8,11 +8,18 @@
 
   function pieceService(grid, pieceConstants) {
     let Piece = function(type) {
-      this.type = type;
-      this.coords = [];
+      let self = this;
+      self.type = type;
+      self.coords = [];
+      _.each(pieceConstants[type].coords, function(x ,y) {
+        let cell = grid.getCell(x, y);
+        console.log(cell);
+        self.coords.push(cell);
+      });
     }
 
     Piece.prototype.putInCell = (cell) => {
+      console.log(cell);
       grid.cells.push(cell);
       return this;
     }
