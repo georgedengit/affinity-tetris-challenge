@@ -1,0 +1,18 @@
+.grid {
+  display: inline-block;
+  border: 1px solid #fff;
+  padding: 1px;
+}
+
+.row {
+  margin: 0;
+}
+
+.cell {
+  background-color: transparent;
+  display: inline-block;
+  margin: 1px;
+  border: 1px solid #ddd;
+  width: 20px;
+  height: 20px;
+}

@@ -9,16 +9,24 @@
   function gridService(gridConstants) {
     let grid = {
       // Grid data
-      data: {},
-      width: gridConstants.WIDTH,
-      height: gridConstants.HEIGHT,
+      cells: [],
+      cols: gridConstants.COLS,
+      rows: gridConstants.ROWS,
 
       // Grid controls
-      newGrid: newGrid
+      newGrid: newGrid,
+      getCell: getCell
     };
 
     function newGrid() {
-      grid.data = {};
+      grid.cells = [];
+    }
+
+    function getCell(x, y) {
+      if (!grid.cells[y] || !grid.cells[y][x]) {
+        return false;
+      }
+      return grid.cells[y][x];
     }
 
     return grid;

@@ -3,7 +3,10 @@
 
   angular.module('app.constants', [])
     .constant('gridConstants', {
-      'WIDTH': 10,
-      'HEIGHT': 22
+      'COLS': 10,
+      'ROWS': 22
+    })
+    .constant('pieceConstants', {
+
     });
 })();

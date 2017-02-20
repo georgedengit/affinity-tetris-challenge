@@ -1,7 +1,13 @@
 <div class="tetris-game">
-  <div class="tetris-game-container container">
-    <div class="tetris-game-title row">
-      <h2>{{vm.title}}</h2>
+  <h2>{{ vm.title }}</h2>
+  <div class="grid">
+    <div
+      class="row"
+      ng-repeat="row in _.range(vm.grid.rows)">
+      <div
+        class="cell"
+        ng-repeat="col in _.range(vm.grid.cols)">
+      </div>
     </div>
   </div>
 </div>

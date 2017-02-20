@@ -4,9 +4,9 @@
   angular.module('app.service')
     .factory('gameService', gameService);
 
-  gameService.$inject = ['gridService', 'tetriminoService'];
+  gameService.$inject = ['gridService', 'pieceService'];
 
-  function gameService(grid, tetrimino) {
+  function gameService(grid, piece) {
     let game = {
       // Game state variables
       currentPiece: null,
@@ -14,7 +14,6 @@
       // Game controls
       newGame: newGame,
       pauseGame: pauseGame,
-      resetGame: resetGame,
 
       // Piece controls
       movePiece: movePiece,
@@ -23,16 +22,12 @@
     };
 
     function newGame() {
-      game.resetGame();
+      game.currentPiece = null;
       grid.newGrid();
     }
 
     function pauseGame() {
 
-    }
-
-    function resetGame() {
-      game.currentPiece
     }
 
     function movePiece() {

@@ -4,15 +4,16 @@
   angular.module('app.tetris')
     .controller('TetrisController', TetrisController);
 
-  TetrisController.$inject = ['gameService', 'keyboardService'];
+  TetrisController.$inject = ['gameService', 'gridService'];
 
-  function TetrisController(gameService, keyboardService) {
+  function TetrisController(game, grid) {
     let vm = this;
     vm.title = "Tetris";
+    vm.grid = grid;
 
     function init() {
       // Start game
-      gameService.newGame();
+      game.newGame();
     }
 
     init();
