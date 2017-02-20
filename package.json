@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "affinity-tetris-challenge",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "Tetris game coding challenge for Affinity",
+  "repository": "https://github.com/georgedengit/affinity-tetris-challenge",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
