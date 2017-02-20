@@ -4,9 +4,9 @@
   angular.module('app.service')
     .factory('gridService', gridService);
 
-  gridService.$inject = ['gridConstants'];
+  gridService.$inject = ['gridConstants', 'pieceConstants'];
 
-  function gridService(gridConstants) {
+  function gridService(gridConstants, pieceConstants) {
     let grid = {
       // Grid data
       cells: [],
@@ -16,7 +16,8 @@
       // Grid controls
       newGrid: newGrid,
       newCell: newCell,
-      getCell: getCell
+      getCell: getCell,
+
     };
 
     function newGrid() {
@@ -35,6 +36,7 @@
 
     function Cell(arr) {
       this.type = null;
+      this.color = 'transparent';
       this.x = arr[0];
       this.y = arr[1];
     }

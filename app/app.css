@@ -9,10 +9,41 @@
 }
 
 .cell {
-  background-color: transparent;
   display: inline-block;
   margin: 1px;
   border: 1px solid #ddd;
   width: 20px;
   height: 20px;
+}
+
+.cyan {
+  background-color: cyan;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.green {
+  background-color: green;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.red {
+  background-color: red;
+}
+
+.transparent {
+  background-color: transparent;
 }

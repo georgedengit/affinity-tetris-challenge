@@ -9,8 +9,11 @@
   ])
     .config(configure)
     .constant('_', window._)
-    .run(($rootScope) => {
+    .run(function($document, $rootScope) {
       $rootScope._ = window._;
+      $document.bind('keypress', function(e) {
+        $rootScope.$broadcast('keypress', e);
+      });
     });
 
   configure.$inject = ['$locationProvider', '$routeProvider'];
