@@ -13,13 +13,7 @@
 
     $document.on('keydown', game.keypress);
 
-    $interval(function() {
-      if (!game.isPaused) {
-        if (!game.currentPiece.moveDown()) {
-          game.newPiece();
-        }
-      }
-    }, 250);
+    $interval(game.checkNextMove, 250);
 
     function init() {
       // Start game

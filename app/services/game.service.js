@@ -4,9 +4,9 @@
   angular.module('app.service')
     .factory('gameService', gameService);
 
-  gameService.$inject = ['$interval', 'gridService', 'pieceService'];
+  gameService.$inject = ['$timeout', 'gridService', 'pieceService'];
 
-  function gameService($interval, grid, Piece) {
+  function gameService($timeout, grid, Piece) {
     const pieces = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
     let game = {
             // Game state variables
@@ -17,7 +17,8 @@
       newGame: newGame,
       newPiece: newPiece,
       pauseGame: pauseGame,
-      keypress: keypress
+      keypress: keypress,
+      checkNextMove: checkNextMove
     };
 
     function newGame() {
@@ -27,11 +28,19 @@
 
     function newPiece() {
       game.currentPiece = new Piece(pieces[Math.floor(Math.random()*pieces.length)]);
-      console.log(game.currentPiece);
     }
 
     function pauseGame() {
       game.isPaused = !game.isPaused;
+    }
+
+    function checkNextMove() {
+      if (!game.isPaused) {
+        if (!game.currentPiece.moveDown()) {
+          grid.clearCompleted();
+          game.newPiece();
+        }
+      }
     }
 
     function keypress($event) {
