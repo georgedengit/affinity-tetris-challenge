@@ -4,10 +4,10 @@
   angular.module('app.service')
     .factory('gameService', gameService);
 
-  gameService.$inject = ['$timeout', 'gridService', 'pieceService'];
+  gameService.$inject = ['gridService', 'pieceService', 'pieceConstants'];
 
-  function gameService($timeout, grid, Piece) {
-    const pieces = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+  function gameService(grid, Piece, pieceConstants) {
+    const pieces = _.keys(pieceConstants);
     let game = {
             // Game state variables
       currentPiece: null,
@@ -27,7 +27,16 @@
     }
 
     function newPiece() {
-      game.currentPiece = new Piece(pieces[Math.floor(Math.random()*pieces.length)]);
+      const randPieceType = pieces[Math.floor(Math.random()*pieces.length)];
+      const isGameOver = _.find(pieceConstants[randPieceType].coords, function(coord) {
+        const cell = grid.getCell(coord[0], coord[1]);
+        return cell.type !== null;
+      });
+      if (isGameOver) {
+        game.newGame();
+      } else {
+        game.currentPiece = new Piece(randPieceType);
+      }
     }
 
     function pauseGame() {
