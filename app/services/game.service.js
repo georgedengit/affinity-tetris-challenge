@@ -58,6 +58,12 @@
         return;
       }
       switch ($event.keyCode) {
+        case 0:
+        case 32: // Space is 0 or 32 depending on browser
+          if (!game.isPaused) {
+            while (currentPiece.moveDown());
+          }
+          break;
         case 37: // Left
           if (!game.isPaused) {
             currentPiece.moveLeft()
