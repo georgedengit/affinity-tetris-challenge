@@ -204,7 +204,7 @@
               coords.push({x: center.x, y: center.y});
               coords.push({x: center.x, y: center.y-1});
               coords.push({x: center.x, y: center.y+1});
-              coords.push({x: center.x+1, y: center.y+1});
+              coords.push({x: center.x-1, y: center.y+1});
               nextState = 4;
               break;
             case 4:
@@ -243,7 +243,7 @@
               coords.push({x: center.x, y: center.y});
               coords.push({x: center.x-1, y: center.y});
               coords.push({x: center.x+1, y: center.y});
-              coords.push({x: center.x+1, y: center.y+1});
+              coords.push({x: center.x+1, y: center.y-1});
               nextState = 1;
               break;
           }
