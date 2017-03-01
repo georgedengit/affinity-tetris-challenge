@@ -1,9 +1,9 @@
 {
-  "name": "affinity-tetris-challenge",
+  "name": "gd-tetris",
   "private": true,
-  "version": "0.0.0",
-  "description": "Tetris game coding challenge for Affinity",
-  "repository": "https://github.com/georgedengit/affinity-tetris-challenge",
+  "version": "1.0.0",
+  "description": "Tetris game",
+  "repository": "https://github.com/georgedengit/gd-tetris",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
